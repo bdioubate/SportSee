@@ -6,7 +6,12 @@ const NutritionReport = ({icon, count, name }) => {
             </div>
             
             <div className="nutritionReport__text">
-                <p>{count}kCal</p>
+                {
+                    name === "calorieCount" ?
+                        <p>{count}kCal</p>
+                    :
+                        <p>{count}g</p>
+                }
                 <h3>{name}</h3>
             </div>
         </div>

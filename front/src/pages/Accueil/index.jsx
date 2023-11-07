@@ -1,10 +1,10 @@
-import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Accueil = () => {
   return (
     <div>
-        <p>User 12</p>
-        <p>User 18</p>
+        <Link to={`/user/${12}`}><p>User 12</p></Link>
+        <Link to={`/user/${18}`}><p>User 18</p></Link>
     </div>
   )
 }

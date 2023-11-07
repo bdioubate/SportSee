@@ -22,8 +22,8 @@ function RoutesPath() {
         <SideBar />
         <div id='dashboard__container'>
             <Switch>
-            <Route path="/" element={<Accueil />}></Route>
-            <Route exact path="/User" element={<User />}></Route>
+            <Route exact path="/" element={<Accueil />}></Route>
+            <Route path="/user/:id" element={<User />}></Route>
             </Switch>
         </div>
     </div>
