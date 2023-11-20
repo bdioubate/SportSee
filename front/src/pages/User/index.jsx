@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+
 //Components
 import Header from '../../components/Header'
 import NutritionReport from '../../components/NutritionReport'
@@ -19,6 +20,8 @@ import lipidImageNutritionReport from '../../assets/icons/lipid.png'
 const User = () => {
 
     const { id } = useParams() 
+
+    const navigate = useNavigate()
 
     const [data, setData] = useState()
     const [dataPerformance, setDataPerformance] = useState()
@@ -95,10 +98,10 @@ const User = () => {
       fetchDataActivity()
       fetchDataPerformance()
       fetchData()
-    }, [id])
+    }, [id, navigate])
 
     if (error) {
-      return <div>Une erreur s'est produite : {error.message}</div>;
+      return navigate(`/404`, { replace: true })
     }
 
   return (

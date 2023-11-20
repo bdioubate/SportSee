@@ -1,13 +1,4 @@
-import React from "react"
-import {
-  LineChart,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Line,
-  Rectangle,
-} from "recharts"
+import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Line, Rectangle } from "recharts"
 
 const LineChartContainer = ({ data }) => {
     const CustomizedTooltip = ({ active, payload }) => {

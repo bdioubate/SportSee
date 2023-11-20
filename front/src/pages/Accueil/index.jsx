@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom'
 
 const Accueil = () => {
   return (
-    <div>
-        <Link to={`/user/${12}`}><p>User 12</p></Link>
-        <Link to={`/user/${18}`}><p>User 18</p></Link>
+    <div id='linksUser'>
+        <Link to={`/user/${12}`}><button className="buttonLinkUser">User <span>12</span></button></Link>
+        <Link to={`/user/${18}`}><button className="buttonLinkUser">User <span>18</span></button></Link>
     </div>
   )
 }
 
-export default Accueil
+export default Accueil 

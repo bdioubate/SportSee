@@ -1,14 +1,9 @@
-import {
-    BrowserRouter as Router,
-    Route,
-    Routes as Switch,
-  } from 'react-router-dom'
-
-import React from 'react'
+import { BrowserRouter as Router, Route, Routes as Switch } from 'react-router-dom'
 
 //Pages
 import Accueil from '../pages/Accueil'
 import User from '../pages/User'
+import Error from '../pages/Error'
 
 //Components
 import Banner from '../components/Banner'
@@ -24,6 +19,7 @@ function RoutesPath() {
             <Switch>
             <Route exact path="/" element={<Accueil />}></Route>
             <Route path="/user/:id" element={<User />}></Route>
+            <Route path="*" element={<Error />}></Route>
             </Switch>
         </div>
     </div>
