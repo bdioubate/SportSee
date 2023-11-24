@@ -1,10 +1,10 @@
-function DataLineChartContainer() {
-    
+function DataLineChartContainer(data) {
+  const dataSessions = [...data]
   //Names
   const dataSessionsNames = ["Durée moyenne des sessions"]
 
   return (
-    {dataSessionsNames}
+    {dataSessions, dataSessionsNames}
   )
   }
   

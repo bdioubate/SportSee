@@ -34,14 +34,11 @@ const User = () => {
   //Data for Components
   let dataSessions = []
   let dataSessionsNames = []
-  //const {dataTest} = DataBarChartContainer(dataActivity.data.sessions)
-  //console.log(dataTest)
 
 
   return (
     data && dataPerformance && dataActivity && dataAverage && dataSessions && dataSessionsNames && (
     <div id='dashboard__container__data'>
-      {console.log(dataPerformance.data)}
         <Header
             prenom={data.data.userInfos.firstName}
         />
@@ -57,9 +54,9 @@ const User = () => {
           </div>
           <div id='dashboard__container__data__analytics__graphs'> 
             {(
-              {dataSessionsNames} = DataLineChartContainer(dataActivity.data.sessions),
+              {dataSessions, dataSessionsNames} = DataLineChartContainer(dataAverage.data.sessions),
               <LineChartContainer
-                data={dataAverage.data.sessions}
+                data={dataSessions}
                 dataNames={dataSessionsNames}
               />
             )}
