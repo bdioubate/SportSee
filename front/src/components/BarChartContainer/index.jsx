@@ -14,19 +14,7 @@ const CustomTooltip = ({ active, payload }) => {
     return null;
   };
 
-const BarChartContainer = ({ data }) => {
-
-  const dataSessions = []
-
-  Object.entries(data).forEach((x) => {
-    const session = {
-      day: Number(x[0])+1,
-      calories: x[1].calories,
-      kilogram: x[1].kilogram
-
-    }
-    dataSessions.push(session)
-  })
+const BarChartContainer = ({ data, dataNames }) => {
 
     return (
       <div id="barChartContainer">
@@ -35,7 +23,7 @@ const BarChartContainer = ({ data }) => {
         <BarChart
           width={835}
           height={320}
-          data={dataSessions}
+          data={data}
           margin={{
             top: 23,
             right: 43,
@@ -51,19 +39,19 @@ const BarChartContainer = ({ data }) => {
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
           <XAxis dataKey="day" tickLine={false} tick={{ fill: "#9B9EAC" }} tickMargin={12}/>
           <YAxis
-            yAxisId="kilogram"
+            yAxisId="data2"
             tickLine={false}
             orientation="right"
             axisLine={false}
             tick={{ fill: "#9B9EAC" }}
             tickMargin={44}
             minTickGap={40}
-            dataKey="kilogram"
+            dataKey="data2"
             domain={["dataMin - 1", "dataMax + 1"]}
           />
           <YAxis
-            yAxisId="calories"
-            dataKey="calories"
+            yAxisId="data1"
+            dataKey="data1"
             domain={[0, "dataMax + 50"]}
             orientation="left"
             hide
@@ -82,16 +70,16 @@ const BarChartContainer = ({ data }) => {
             height={95}
           />
           <Bar
-            yAxisId="kilogram"
-            dataKey="kilogram"
-            name="Poids (kg)"
+            yAxisId="data2"
+            dataKey="data2"
+            name={dataNames[1]}
             fill="rgba(40, 45, 48, 1)"
             radius={[4, 4, 0, 0]}
           />
           <Bar
-            yAxisId="calories"
-            dataKey="calories"
-            name="Calories brûlées (kCal)"
+            yAxisId="data1"
+            dataKey="data1"
+            name={dataNames[0]}
             fill="rgba(230, 0, 0, 1)"
             radius={[4, 4, 0, 0]}
           />

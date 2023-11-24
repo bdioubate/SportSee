@@ -1,6 +1,6 @@
 import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Line, Rectangle } from "recharts"
 
-const LineChartContainer = ({ data }) => {
+const LineChartContainer = ({ data, dataNames }) => {
     const CustomizedTooltip = ({ active, payload }) => {
       if (active && payload && payload.length) {
         return (
@@ -26,7 +26,7 @@ const LineChartContainer = ({ data }) => {
 
     return (
       <div id="lineChartContainer">
-        <h3> Durée moyenne des sessions</h3>
+        <h3>{dataNames[0]}</h3>
         <LineChart
           width={258}
           height={263}

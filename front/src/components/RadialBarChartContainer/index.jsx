@@ -1,6 +1,6 @@
 import { RadialBarChart, RadialBar } from 'recharts';
 
-const RadialBarChartContainer = ({score}) => { 
+const RadialBarChartContainer = ({data, dataNames}) => { 
   const dataRadial = [
     {
       uv: 1,
@@ -8,13 +8,13 @@ const RadialBarChartContainer = ({score}) => {
     }
   ];
 
-  const pourcentageScore = score * 100
-  const angleScore = score * 360
+  const pourcentageScore = data * 100
+  const angleScore = data * 360
 
   return (
     <div id="radialBarChartContainer" > 
-    <h4>Score</h4>
-    <p><span>{`${pourcentageScore}`}%</span>de votre objectif</p> {/*span valeur a modifier*/}
+    <h4>{dataNames[0]}</h4>
+    <p><span>{`${pourcentageScore}`}%</span>de votre objectif</p>
     <RadialBarChart
       width={254}
       height={258}
@@ -22,7 +22,7 @@ const RadialBarChartContainer = ({score}) => {
       style={{ backgroundColor: "#FBFBFB", borderRadius: "5px" }}
       innerRadius={88}
       barSize={10}
-      startAngle={angleScore} //Valeur a modifier
+      startAngle={angleScore} 
       endAngle={0}
     >
       <RadialBar dataKey="uv" />

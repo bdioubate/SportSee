@@ -2,24 +2,10 @@ import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Responsi
 
 const RadarChartContainer = ({ data }) => {  
 
-  const dataRadar = []
-  const dataValues = data.data
-  const dataNames = data.kind
-  console.log(dataValues)
-
-  Object.values(dataValues).forEach((x, index) => {
-    const radar = {
-      subject: dataNames[index+1],
-      A: x.value,
-    }
-
-    dataRadar.unshift(radar)
-  })
-
   return (
     <div id="radarChartContainer">
       <ResponsiveContainer width="100%" height="100%">
-        <RadarChart cx="50%" cy="50%" outerRadius="72%" data={dataRadar}>
+        <RadarChart cx="50%" cy="50%" outerRadius="72%" data={data}>
           <PolarGrid />
           <PolarAngleAxis dataKey="subject"
           tickLine={false}

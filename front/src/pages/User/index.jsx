@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 //Components
 import Header from '../../components/Header'
@@ -9,7 +8,15 @@ import LineChartContainer from '../../components/LineChartContainer'
 import RadarChartContainer from '../../components/RadarChartContainer' 
 import RadialBarChartContainer from '../../components/RadialBarChartContainer'
 
-//Test
+//Data Transformation for Components
+import DataBarChartContainer from '../../components/BarChartContainer/dataBarChartContainer'
+import DataLineChartContainer from '../../components/LineChartContainer/dataLineChartContainer'
+import DataRadarChartContainer from '../../components/RadarChartContainer/dataRadarChartContainer'
+import DataRadialBarChartContainer from '../../components/RadialBarChartContainer/dataRadialBarChartContainer'
+
+//API call
+import CallAPI from '../../data/CallAPI'
+
 //image
 import calorieImageNutritionReport from '../../assets/icons/calorie.png'
 import proteinImageNutritionReport from '../../assets/icons/protein.png'
@@ -19,93 +26,20 @@ import lipidImageNutritionReport from '../../assets/icons/lipid.png'
 
 const User = () => {
 
-    const { id } = useParams() 
+  const { id } = useParams() 
 
-    const navigate = useNavigate()
+  
+  const {data, dataPerformance, dataActivity, dataAverage} = CallAPI(id)
 
-    const [data, setData] = useState()
-    const [dataPerformance, setDataPerformance] = useState()
-    const [dataActivity, setDataActivity] = useState()
-    const [dataAverage, setDataAverage] = useState()
-    const [error, setError] = useState()
-  
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const apiUrl = `http://localhost:3000/user/${id}`
-          const response = await fetch(apiUrl);
-  
-          if (!response.ok) {
-            throw new Error('La requête a échoué')
-          }
-  
-          const jsonData = await response.json()
-          setData(jsonData)
-        } catch (error) {
-          setError(error)
-        }
-      }
+  //Data for Components
+  let dataSessions = []
+  let dataSessionsNames = []
+  //const {dataTest} = DataBarChartContainer(dataActivity.data.sessions)
+  //console.log(dataTest)
 
-      const fetchDataPerformance = async () => {
-        try {
-          const apiUrl = `http://localhost:3000/user/${id}/performance`
-          const response = await fetch(apiUrl);
-  
-          if (!response.ok) {
-            throw new Error('La requête a échoué')
-          }
-  
-          const jsonData = await response.json()
-          setDataPerformance(jsonData)
-        } catch (error) {
-          setError(error)
-        }
-      }
-
-      const fetchDataActivity = async () => {
-        try {
-          const apiUrl = `http://localhost:3000/user/${id}/activity`
-          const response = await fetch(apiUrl);
-  
-          if (!response.ok) {
-            throw new Error('La requête a échoué')
-          }
-  
-          const jsonData = await response.json()
-          setDataActivity(jsonData)
-        } catch (error) {
-          setError(error)
-        }
-      }
-
-      const fetchDataAverage = async () => {
-        try {
-          const apiUrl = `http://localhost:3000/user/${id}/average-sessions`
-          const response = await fetch(apiUrl);
-  
-          if (!response.ok) {
-            throw new Error('La requête a échoué')
-          }
-  
-          const jsonData = await response.json()
-          setDataAverage(jsonData)
-        } catch (error) {
-          setError(error)
-        }
-      }
-
-      fetchDataAverage()
-      fetchDataActivity()
-      fetchDataPerformance()
-      fetchData()
-    }, [id, navigate])
-
-    if (error) {
-      return navigate(`/404`, { replace: true })
-    }
 
   return (
-    data && dataPerformance && dataActivity && dataAverage && (
+    data && dataPerformance && dataActivity && dataAverage && dataSessions && dataSessionsNames && (
     <div id='dashboard__container__data'>
       {console.log(dataPerformance.data)}
         <Header
@@ -113,30 +47,37 @@ const User = () => {
         />
         <div id='dashboard__container__data__analytics'>
           <div id='dashboard__container__data__analytics__activity'>
-            <BarChartContainer 
-              data={dataActivity.data.sessions}
-            />
+            {
+              ({dataSessions, dataSessionsNames} = DataBarChartContainer(dataActivity.data.sessions),
+              <BarChartContainer 
+                data={dataSessions}
+                dataNames={dataSessionsNames}
+              />)
+            }
           </div>
           <div id='dashboard__container__data__analytics__graphs'> 
-            <LineChartContainer
-              data={dataAverage.data.sessions}
-            />
-            <RadarChartContainer
-              data={dataPerformance.data} 
-            />
-            <RadialBarChartContainer
-            score={Object.values(data.data)[2]}
-            />
+            {(
+              {dataSessionsNames} = DataLineChartContainer(dataActivity.data.sessions),
+              <LineChartContainer
+                data={dataAverage.data.sessions}
+                dataNames={dataSessionsNames}
+              />
+            )}
+            {(
+              {dataSessions} = DataRadarChartContainer(dataPerformance.data),
+              <RadarChartContainer
+                data={dataSessions} 
+              /> 
+            )}
+            {(
+              {dataSessions, dataSessionsNames} = DataRadialBarChartContainer(data),
+              <RadialBarChartContainer
+              data={dataSessions}
+              dataNames={dataSessionsNames}
+              />
+            )}
           </div>
           <div id='dashboard__container__data__analytics__nutrition'>
-            {/*Object.entries(data.data.keyData).forEach((x, index) => {
-              <NutritionReport 
-              key={`${index}`}
-              icon={calorieImageNutritionReport}
-              count={x[1]}
-              name={x[0].split('Count')[0]}
-              />
-            })*/} 
             <NutritionReport  
             icon={calorieImageNutritionReport}
             count={Object.values(data.data.keyData)[0]}
