@@ -6,7 +6,7 @@ const RadialBarChartContainer = ({data, dataNames}) => {
       uv: 1,
       fill: "#FF0000" 
     }
-  ];
+  ]
 
   const pourcentageScore = data * 100
   const angleScore = data * 360
@@ -21,7 +21,7 @@ const RadialBarChartContainer = ({data, dataNames}) => {
       data={dataRadial}
       style={{ backgroundColor: "#FBFBFB", borderRadius: "5px" }}
       innerRadius={88}
-      barSize={10}
+      barSize={10} 
       startAngle={angleScore} 
       endAngle={0}
     >

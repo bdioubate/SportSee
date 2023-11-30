@@ -34,10 +34,9 @@ const BarChartContainer = ({ data, dataNames }) => {
           barGap={8}
           tickMargin={16}
           className="barChart__content"
-          barCategoryGap={54}
         >
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
-          <XAxis dataKey="day" tickLine={false} tick={{ fill: "#9B9EAC" }} tickMargin={12}/>
+          <XAxis dataKey="day" tickLine={false} tick={{ fill: "#9B9EAC" }} tickMargin={2}/>
           <YAxis
             yAxisId="data2"
             tickLine={false}
@@ -56,7 +55,6 @@ const BarChartContainer = ({ data, dataNames }) => {
             orientation="left"
             hide
           />
-
           <Tooltip
             content={<CustomTooltip />}
             cursor={{ fill: " rgba(196, 196, 196, 0.5)" }}

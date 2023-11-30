@@ -12,7 +12,7 @@ const LineChartContainer = ({ data, dataNames }) => {
       return null;
     };
   
-    const CustomizedCursor = ({ points = 2500 }) => {
+    const CustomizedCursor = ({ points }) => {
       return (
         <Rectangle
           fill="#000000"
@@ -45,7 +45,7 @@ const LineChartContainer = ({ data, dataNames }) => {
           />
   
           <YAxis
-            hide={true}
+            hide 
             dataKey="sessionLength"
             domain={["dataMin - 20", "dataMax + 20"]}
           />
